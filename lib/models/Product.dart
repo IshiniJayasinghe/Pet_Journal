@@ -38,7 +38,7 @@ List<Product> products = [
       price: 234,
       size: 10,
       description: dummyText,
-      image: "assets/images/bag_3.png",
+      image: "assets/images/dogfood_2.png",
       color: const Color(0xFF989493)),
   Product(
       id: 4,
