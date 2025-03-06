@@ -54,8 +54,8 @@ List<Product> products = [
       price: 234,
       size: 12,
       description: dummyText,
-      image: "assets/images/bag_5.png",
-      color: const Color(0xFFFB7883)),
+      image: "assets/images/dogfood_6.png",
+      color: const Color.fromARGB(255, 169, 186, 241)),
   Product(
     id: 6,
     title: "Office Code",
