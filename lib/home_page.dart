@@ -36,6 +36,81 @@ class _HomePageState extends State<HomePage> {
           ],
         )
       ),
+      body: Stack(
+        children: [
+          // Background Logo
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.1, // Adjust opacity for subtle effect
+              child: Image.asset(
+                'assets/petJournal.jpg', // Your background logo
+                fit: BoxFit.cover, // Cover entire background
+              ),
+            ),
+          ),
+
+          // Buttons
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              CustomButton(label: "Pet Records"),
+              CustomButton(label: "E-Channeling"),
+              CustomButton(label: "Reminders"),
+              CustomButton(label: "PetShop"),
+            ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.orange,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.black54,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.explore),
+            label: "Explore",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark_border),
+            label: "Saved",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications_none),
+            label: "Updates",
+          ),
+
+        ],
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final String label;
+  const CustomButton({super.key, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        decoration: BoxDecoration(
+          color: Colors.orange,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Center(
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
