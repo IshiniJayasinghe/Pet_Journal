@@ -10,7 +10,7 @@ class CounterWithFavBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      children: <Widget>[.
         const CartCounter(),
         Container(
           padding: const EdgeInsets.all(8),
