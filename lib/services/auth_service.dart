@@ -27,7 +27,7 @@ class AuthService {
         password: password,
       );
     } catch (e) {
-      print('Error registering: $e');
+      print('Error while  registering: $e');
       rethrow;
     }
   }
