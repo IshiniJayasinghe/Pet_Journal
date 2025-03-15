@@ -7,6 +7,7 @@ class ProductTitleWithImage extends StatelessWidget {
   const ProductTitleWithImage({super.key, required this.product});
 
   final Product product;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,9 +53,9 @@ class ProductTitleWithImage extends StatelessWidget {
                     fit: BoxFit.fill,
                   ),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
