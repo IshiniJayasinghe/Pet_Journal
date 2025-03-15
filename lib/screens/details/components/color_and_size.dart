@@ -26,7 +26,7 @@ class ColorAndSize extends StatelessWidget {
                     color: Color(0xFFF8C078),
                     isSelected: true,
                   ),
-                  ColorDot(color: Color(0xFFA29B9B), isSelected: false),
+                  ColorDot(color: Color.fromARGB(255, 0, 0, 0), isSelected: false),
                 ],
               ),
             ],

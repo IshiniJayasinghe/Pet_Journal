@@ -34,7 +34,7 @@ class ItemCard extends StatelessWidget {
             child: Text(
               // products is out demo list
               product.title,
-              style: const TextStyle(color: kTextLightColor),
+              style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             ),
           ),
           Text(

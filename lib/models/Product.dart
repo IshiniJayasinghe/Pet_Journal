@@ -23,7 +23,7 @@ List<Product> products = [
       size: 12,
       description: dummyText,
       image: "assets/images/dogfood_3.png",
-      color: const Color.fromARGB(255, 119, 139, 235)),
+      color: const Color.fromARGB(255, 241, 171, 19)),
       
   Product(
       id: 2,
@@ -32,7 +32,7 @@ List<Product> products = [
       size: 8,
       description: dummyText,
       image: "assets/images/dogfood_2.png",
-      color: const Color.fromARGB(255, 227, 158, 241)),
+      color: const Color.fromARGB(255, 241, 171, 19)),
   Product(
       id: 3,
       title: "abc",
@@ -40,7 +40,7 @@ List<Product> products = [
       size: 10,
       description: dummyText,
       image: "assets/images/dogfood_4.png",
-      color: const Color.fromARGB(255, 190, 147, 110)),
+      color: const Color.fromARGB(255, 241, 171, 19)),
   Product(
       id: 4,
       title: "Old Fashion",
@@ -48,7 +48,7 @@ List<Product> products = [
       size: 11,
       description: dummyText,
       image: "assets/images/dogfood_5.png",
-      color: const Color.fromARGB(255, 236, 201, 43)),
+      color: const Color.fromARGB(255, 241, 171, 19)),
   Product(
       id: 5,
       title: "Office Code",
@@ -56,7 +56,7 @@ List<Product> products = [
       size: 12,
       description: dummyText,
       image: "assets/images/dogfood_6.png",
-      color: const Color.fromARGB(255, 169, 186, 241)),
+      color: const Color.fromARGB(255, 241, 171, 19)),
   Product(
     id: 6,
     title: "Office Code",
@@ -64,11 +64,9 @@ List<Product> products = [
     size: 12,
     description: dummyText,
     image: "assets/images/dogfood_6.png",
-    color: const Color(0xFFAEAEAE),
-
-    
-  ),
+    color: const Color.fromARGB(255, 241, 171, 19)),
 ];
+
 
 String dummyText =
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. When an unknown printer took a galley.";

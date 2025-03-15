@@ -16,14 +16,14 @@ class ProductTitleWithImage extends StatelessWidget {
         children: <Widget>[
           const Text(
             "Aristocratic Hand Bag",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Color.fromARGB(255, 201, 199, 199)),
           ),
           Text(
             product.title,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                .copyWith(color: const Color.fromARGB(255, 242, 241, 239), fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: kDefaultPaddin),
           Row(

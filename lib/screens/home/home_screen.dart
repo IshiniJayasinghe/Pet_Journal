@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 241, 171, 19),
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset("assets/icons/back.svg"),
