@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../models/product.dart';
 import '../details/components/add_to_cart.dart'; // ✅ Import cartItems
-import '../payment/payment_screen.dart'; // ✅ Import Payment Screen
+import '../payment/payment_screen.dart'; // ✅ Import Payment Page
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key, required this.cartItems});
@@ -19,7 +19,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Cart"),
-        backgroundColor: const Color.fromARGB(255, 241, 171, 19),
+        backgroundColor: const Color.fromARGB(255, 249, 213, 54),
       ),
       body: widget.cartItems.isEmpty
           ? const Center(

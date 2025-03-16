@@ -36,7 +36,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         leading: IconButton(
           icon: SvgPicture.asset(
             'assets/icons/back.svg',
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            colorFilter: const ColorFilter.mode(Color.fromARGB(255, 255, 255, 255), BlendMode.srcIn),
           ),
           onPressed: () => Navigator.pop(context),
         ),

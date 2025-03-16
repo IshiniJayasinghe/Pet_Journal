@@ -11,7 +11,8 @@ class CartItem {
   CartItem({required this.product, required this.quantity});
 }
 
-List<CartItem> cartItems = []; // ✅ Global cart list
+// ✅ Ensure cartItems is globally accessible
+List<CartItem> cartItems = [];  
 
 class AddToCart extends StatefulWidget {
   const AddToCart({super.key, required this.product, required this.quantity});

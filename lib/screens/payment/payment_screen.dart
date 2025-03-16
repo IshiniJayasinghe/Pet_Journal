@@ -16,7 +16,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Payment"),
-        backgroundColor: const Color.fromARGB(255, 241, 171, 19),
+        backgroundColor: const Color.fromARGB(255, 249, 213, 54),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,23 +54,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 },
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.payment),
-              title: const Text("UPI / Mobile Wallet"),
-              trailing: Radio<String>(
-                value: "UPI",
-                groupValue: selectedPaymentMethod,
-                onChanged: (value) {
-                  setState(() {
-                    selectedPaymentMethod = value!;
-                  });
-                },
-              ),
-            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // ✅ Simulate a successful payment
                 showDialog(
                   context: context,
                   builder: (context) {
