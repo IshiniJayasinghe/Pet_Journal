@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
 import '../../../models/product.dart';
 
@@ -32,13 +31,12 @@ class ItemCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
             child: Text(
-              // products is out demo list
               product.title,
               style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
             ),
           ),
           Text(
-            "\$${product.price}",
+            "Rs. ${product.price}", // ✅ Changed from $ to Rs.
             style: const TextStyle(fontWeight: FontWeight.bold),
           )
         ],
