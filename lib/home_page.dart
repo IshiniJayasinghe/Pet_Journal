@@ -8,6 +8,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void _navigateToProfile(){
+    Navigator.push(context, MaterialPageRoute(builder: (context) =>null/*ProfilePage()*/));
+  }
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    const ExplorePage(),
+    const SavedPage(),
+    const UpdatesPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(onPressed: null, icon: Icon(Icons.account_circle, size: 30,))  //have to change null to function
+          IconButton(onPressed: _navigateToProfile, icon: Icon(Icons.account_circle, size: 30,))  //have to change null to function
         ],
         backgroundColor: Colors.orange,
       ),
@@ -52,11 +68,11 @@ class _HomePageState extends State<HomePage> {
           // Buttons
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              CustomButton(label: "Pet Records"),
-              CustomButton(label: "E-Channeling"),
-              CustomButton(label: "Reminders"),
-              CustomButton(label: "PetShop"),
+            children:  [
+              CustomButton(label: "Pet Records", onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PetRecordsPage()))),
+              CustomButton(label: "E-Channeling",onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EChannelling()))),
+              CustomButton(label: "Reminders",onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Reminders()))),
+              CustomButton(label: "PetShop",onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PetShop()))),
             ],
           ),
         ],
@@ -65,6 +81,8 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.orange,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black54,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.explore),
@@ -87,7 +105,8 @@ class _HomePageState extends State<HomePage> {
 
 class CustomButton extends StatelessWidget {
   final String label;
-  const CustomButton({super.key, required this.label});
+  final VoidCallback onPressed;
+  const CustomButton({super.key, required this.label, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
