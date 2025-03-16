@@ -22,7 +22,7 @@ List<Product> products = [
     price: 1500,
     description: dummyText,
     image: "assets/images/dogfood_3.png",
-    color: const Color.fromARGB(255, 241, 171, 19),
+    color: const Color.fromARGB(255, 21, 35, 126),
   ),
   Product(
     id: 2,
@@ -30,7 +30,7 @@ List<Product> products = [
     price: 1999,
     description: dummyText,
     image: "assets/images/dogfood_2.png",
-    color: const Color.fromARGB(255, 241, 171, 19),
+    color: const Color.fromARGB(255, 124, 57, 179),
   ),
   Product(
     id: 3,
@@ -38,7 +38,7 @@ List<Product> products = [
     price: 234,
     description: dummyText,
     image: "assets/images/dogfood_4.png",
-    color: const Color.fromARGB(255, 241, 171, 19),
+    color: const Color.fromARGB(255, 246, 156, 71),
   ),
   Product(
     id: 4,
@@ -54,7 +54,7 @@ List<Product> products = [
     price: 234,
     description: dummyText,
     image: "assets/images/dogfood_6.png",
-    color: const Color.fromARGB(255, 241, 171, 19),
+    color: const Color.fromARGB(255, 62, 190, 209),
   ),
   Product(
     id: 6,
@@ -62,7 +62,7 @@ List<Product> products = [
     price: 234,
     description: dummyText,
     image: "assets/images/dogfood_6.png",
-    color: const Color.fromARGB(255, 241, 171, 19),
+    color: const Color.fromARGB(255, 86, 122, 175),
   ),
 ];
 

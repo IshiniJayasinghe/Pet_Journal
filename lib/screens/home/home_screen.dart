@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../constants.dart';
-
 import '../../models/product.dart';
 import '../details/details_screen.dart';
 import 'components/categorries.dart';
 import 'components/item_card.dart';
+import '../cart/cart_screen.dart'; // ✅ Import CartScreen
+import '../details/components/add_to_cart.dart'; // ✅ Import cartItems
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 241, 171, 19),
+        backgroundColor: const Color.fromARGB(255, 247, 205, 114),
         elevation: 0,
         leading: IconButton(
           icon: SvgPicture.asset("assets/icons/back.svg"),
@@ -24,18 +25,26 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/search.svg",
-              colorFilter: const ColorFilter.mode(kTextColor, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(Color.fromARGB(255, 247, 205, 114), BlendMode.srcIn),
             ),
             onPressed: () {},
           ),
+          // ✅ Clicking the cart icon now navigates to Cart Page
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/cart.svg",
-              colorFilter: const ColorFilter.mode(kTextColor, BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(Color.fromARGB(255, 247, 205, 114), BlendMode.srcIn),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CartScreen(cartItems: cartItems),
+                ),
+              );
+            },
           ),
-          const SizedBox(width: kDefaultPaddin / 2)
+          const SizedBox(width: kDefaultPaddin / 2),
         ],
       ),
       body: Column(
@@ -44,7 +53,7 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
             child: Text(
-              "Pet shop",
+              "Pet Shop",
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
@@ -82,3 +91,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+ 
