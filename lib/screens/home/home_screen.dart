@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/search.svg",
-              colorFilter: const ColorFilter.mode(Color.fromARGB(255, 247, 205, 114), BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(Color.fromARGB(255, 0, 0, 0), BlendMode.srcIn),
             ),
             onPressed: () {},
           ),
@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/cart.svg",
-              colorFilter: const ColorFilter.mode(Color.fromARGB(255, 247, 205, 114), BlendMode.srcIn),
+              colorFilter: const ColorFilter.mode(Color.fromARGB(255, 0, 0, 0), BlendMode.srcIn),
             ),
             onPressed: () {
               Navigator.push(
