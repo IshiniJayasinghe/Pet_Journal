@@ -29,8 +29,10 @@ class DetailsScreen extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: SvgPicture.asset("assets/icons/search.svg"),
-            onPressed: () {},
+            icon: const Icon(Icons.person, color: Colors.white), // ✅ Profile Icon
+            onPressed: () {
+              // TODO: Navigate to the User Profile Page
+            },
           ),
           IconButton(
             icon: SvgPicture.asset("assets/icons/cart.svg"),
@@ -65,7 +67,7 @@ class DetailsScreen extends StatelessWidget {
                         const SizedBox(height: kDefaultPaddin / 2),
                         Description(product: product),
                         const SizedBox(height: kDefaultPaddin / 2),
-                        CounterWithFavBtn(product: product), // ✅ Pass product
+                        CounterWithFavBtn(product: product),
                         const SizedBox(height: kDefaultPaddin / 2),
                         AddToCart(product: product),
                       ],
