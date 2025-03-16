@@ -4,9 +4,14 @@ import '../../../models/product.dart';
 import 'cart_counter.dart';
 
 class CounterWithFavBtn extends StatefulWidget {
-  const CounterWithFavBtn({super.key, required this.product});
+  const CounterWithFavBtn({
+    super.key,
+    required this.product,
+    required this.onQuantityChanged, // ✅ Accept quantity update function
+  });
 
-  final Product product; // ✅ Get product details for price & color
+  final Product product;
+  final Function(int) onQuantityChanged; // ✅ Callback function
 
   @override
   State<CounterWithFavBtn> createState() => _CounterWithFavBtnState();
@@ -40,6 +45,7 @@ class _CounterWithFavBtnState extends State<CounterWithFavBtn> {
                     setState(() {
                       if (numOfItems > 1) {
                         numOfItems--;
+                        widget.onQuantityChanged(numOfItems); // ✅ Update quantity in details screen
                       }
                     });
                   },
@@ -56,6 +62,7 @@ class _CounterWithFavBtnState extends State<CounterWithFavBtn> {
                   press: () {
                     setState(() {
                       numOfItems++;
+                      widget.onQuantityChanged(numOfItems); // ✅ Update quantity in details screen
                     });
                   },
                 ),
