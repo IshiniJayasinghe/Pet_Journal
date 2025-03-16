@@ -3,10 +3,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../models/product.dart';
 import 'cart_counter.dart';
 
-class CounterWithFavBtn extends StatelessWidget {
+class CounterWithFavBtn extends StatefulWidget {
   const CounterWithFavBtn({super.key, required this.product});
 
-  final Product product; // ✅ Get product details for color
+  final Product product; // ✅ Get product details for price & color
+
+  @override
+  State<CounterWithFavBtn> createState() => _CounterWithFavBtnState();
+}
+
+class _CounterWithFavBtnState extends State<CounterWithFavBtn> {
+  int numOfItems = 1; // ✅ Track quantity
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +25,42 @@ class CounterWithFavBtn extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: product.color, // ✅ Set text color to match product background
+            color: widget.product.color, // ✅ Matches product background color
           ),
         ),
         const SizedBox(height: 5), // ✅ Small spacing
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const CartCounter(),
+            Row(
+              children: [
+                buildOutlinedButton(
+                  icon: Icons.remove,
+                  press: () {
+                    setState(() {
+                      if (numOfItems > 1) {
+                        numOfItems--;
+                      }
+                    });
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    numOfItems.toString().padLeft(2, "0"),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ),
+                buildOutlinedButton(
+                  icon: Icons.add,
+                  press: () {
+                    setState(() {
+                      numOfItems++;
+                    });
+                  },
+                ),
+              ],
+            ),
             Container(
               padding: const EdgeInsets.all(8),
               height: 32,
@@ -38,7 +73,33 @@ class CounterWithFavBtn extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 5), // ✅ Space between counter and subtotal
+        Text(
+          "Subtotal: Rs. ${widget.product.price * numOfItems}", // ✅ Subtotal Calculation
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: widget.product.color, // ✅ Match product color
+          ),
+        ),
       ],
+    );
+  }
+
+  Widget buildOutlinedButton({required IconData icon, required VoidCallback press}) {
+    return SizedBox(
+      width: 40,
+      height: 32,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13),
+          ),
+        ),
+        onPressed: press,
+        child: Icon(icon),
+      ),
     );
   }
 }

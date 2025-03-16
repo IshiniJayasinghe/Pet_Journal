@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../models/product.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key, required this.cartItems});
 
   final List<Product> cartItems;
 
   @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Cart"),
-        backgroundColor: const Color.fromARGB(255, 247, 205, 114),
+        backgroundColor: const Color.fromARGB(255, 241, 171, 19),
       ),
-      body: cartItems.isEmpty
+      body: widget.cartItems.isEmpty
           ? const Center(
               child: Text(
                 "Your cart is empty!",
@@ -22,21 +27,25 @@ class CartScreen extends StatelessWidget {
               ),
             )
           : ListView.builder(
-              itemCount: cartItems.length,
+              itemCount: widget.cartItems.length,
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: Image.asset(
-                    cartItems[index].image,
+                    widget.cartItems[index].image,
                     width: 50,
                     height: 50,
                   ),
-                  title: Text(cartItems[index].title),
-                  subtitle: Text("\$${cartItems[index].price}"),
+                  title: Text(widget.cartItems[index].title),
+                  subtitle: Text(
+                    "Rs. ${widget.cartItems[index].price}", // ✅ Changed from $ to Rs.
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   trailing: IconButton(
                     icon: const Icon(Icons.remove_circle, color: Colors.red),
                     onPressed: () {
-                      cartItems.removeAt(index);
-                      (context as Element).markNeedsBuild(); // Refresh UI
+                      setState(() {
+                        widget.cartItems.removeAt(index);
+                      });
                     },
                   ),
                 );
