@@ -18,7 +18,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Cart"),
-        backgroundColor: kTextColor,
+        backgroundColor: const Color.fromARGB(255, 241, 171, 19),
       ),
       body: widget.cartItems.isEmpty
           ? const Center(
