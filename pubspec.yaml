@@ -38,10 +38,10 @@ dependencies:
   # State management
   provider: ^6.1.1
 
-  # Firebase - Temporarily disabled until proper setup
-  # firebase_core: ^2.24.2
-  # firebase_auth: ^4.15.3
-  # cloud_firestore: ^4.13.6
+  # Firebase
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  cloud_firestore: ^4.13.6
 
   # UI components
   google_fonts: ^6.1.0
