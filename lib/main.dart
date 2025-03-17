@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'providers/auth_provider.dart';
+import 'services/auth_service.dart';
 import 'screens/splash_screen.dart';
 import 'screens/auth/role_selection_screen.dart';
 import 'screens/auth/vet_login_screen.dart';
@@ -10,6 +12,7 @@ import 'screens/auth/owner_register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -18,8 +21,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AuthProvider(),
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+          create: (_) => AuthService(),
+        ),
+        ChangeNotifierProxyProvider<AuthService, AuthProvider>(
+          create: (_) => AuthProvider(),
+          update: (_, authService, authProvider) =>
+              authProvider!..update(authService),
+        ),
+      ],
       child: MaterialApp(
         title: 'PetJournal',
         theme: ThemeData(

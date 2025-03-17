@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/auth_provider.dart';
+import '../../providers/auth_provider.dart' as app_auth;
 
 class VetLoginScreen extends StatefulWidget {
   const VetLoginScreen({super.key});
@@ -23,15 +23,33 @@ class _VetLoginScreenState extends State<VetLoginScreen> {
 
   Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
-      try {
-        await context.read<AuthProvider>().signIn(
-          _usernameController.text.trim(),
-          _passwordController.text.trim(),
-        );
-      } catch (e) {
-        if (!mounted) return;
+      final success = await context.read<app_auth.AuthProvider>().signIn(
+        _usernameController.text.trim(),
+        _passwordController.text.trim(),
+      );
+
+      if (!mounted) return;
+
+      final authProvider = context.read<app_auth.AuthProvider>();
+      if (success) {
+        if (authProvider.userRole == app_auth.UserRole.veterinarian) {
+          Navigator.pushReplacementNamed(context, '/vet_home');
+        } else {
+          // Wrong role, sign out and show error
+          await authProvider.signOut();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('This login is for veterinarians only.'),
+              backgroundColor: Color(0xFF2B2B2B),
+            ),
+          );
+        }
+      } else if (authProvider.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
+          SnackBar(
+            content: Text(authProvider.errorMessage!),
+            backgroundColor: const Color(0xFF2B2B2B),
+          ),
         );
       }
     }
@@ -130,7 +148,7 @@ class _VetLoginScreenState extends State<VetLoginScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: context.watch<AuthProvider>().isLoading ? null : _login,
+                      onPressed: context.watch<app_auth.AuthProvider>().isLoading ? null : _login,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF2B2B2B),
                         foregroundColor: Colors.white,
@@ -139,7 +157,7 @@ class _VetLoginScreenState extends State<VetLoginScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: context.watch<AuthProvider>().isLoading
+                      child: context.watch<app_auth.AuthProvider>().isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
                               'Lets Go',

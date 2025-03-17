@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/auth_provider.dart';
+import '../../providers/auth_provider.dart' as app_auth;
 
 class VetRegisterScreen extends StatefulWidget {
   const VetRegisterScreen({super.key});
@@ -30,10 +30,25 @@ class _VetRegisterScreenState extends State<VetRegisterScreen> {
   Future<void> _register() async {
     if (_formKey.currentState!.validate()) {
       try {
-        await context.read<AuthProvider>().register(
+        final success = await context.read<app_auth.AuthProvider>().register(
           _emailController.text.trim(),
           _passwordController.text.trim(),
+          app_auth.UserRole.veterinarian,
         );
+
+        if (!mounted) return;
+
+        if (success) {
+          Navigator.pushReplacementNamed(context, '/vet_home');
+        } else {
+          final errorMessage = context.read<app_auth.AuthProvider>().errorMessage;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage ?? 'Registration failed'),
+              backgroundColor: const Color(0xFF2B2B2B),
+            ),
+          );
+        }
         if (!mounted) return;
         Navigator.pop(context);
       } catch (e) {
@@ -213,7 +228,7 @@ class _VetRegisterScreenState extends State<VetRegisterScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: context.watch<AuthProvider>().isLoading ? null : _register,
+                      onPressed: context.watch<app_auth.AuthProvider>().isLoading ? null : _register,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF2B2B2B),
                         foregroundColor: Colors.white,
@@ -222,7 +237,7 @@ class _VetRegisterScreenState extends State<VetRegisterScreen> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: context.watch<AuthProvider>().isLoading
+                      child: context.watch<app_auth.AuthProvider>().isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
                               'Register',
