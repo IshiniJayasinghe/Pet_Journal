@@ -11,7 +11,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   late AnimationController _controller;
   final List<Animation<double>> _pawOpacities = [];
   final List<Animation<Offset>> _pawOffsets = [];
-  final List<Animation<double>> _pawScales = [];
   static const int pawCount = 8;
 
   @override
@@ -89,25 +88,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           ),
         ),
       );
-
-      // Paw scale animation (bouncy zoom-in effect)
-      _pawScales.add(
-        TweenSequence<double>([
-          TweenSequenceItem(
-            tween: Tween<double>(begin: 0.5, end: 1.2),
-            weight: 40.0,
-          ),
-          TweenSequenceItem(
-            tween: Tween<double>(begin: 1.2, end: 1.0),
-            weight: 60.0,
-          ),
-        ]).animate(
-          CurvedAnimation(
-            parent: _controller,
-            curve: Interval(startTime, endTime, curve: Curves.elasticOut),
-          ),
-        ),
-      );
     }
 
     // Start the animation
@@ -137,30 +117,23 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             child: Column(
               children: [
                 const Spacer(flex: 2),
-                // Logo and App Name Container with Scaling Animation
-                AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: 1 + (_controller.value * 0.2),
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Logo
-                        Image.asset(
-                          'assets/images/logo.jpeg',
-                          height: 200,
-                          fit: BoxFit.contain,
-                        ),
-                        const SizedBox(height: 32),
-                      ],
-                    ),
+                // Logo and App Name Container
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Logo
+                      Image.asset(
+                        'assets/images/logo.jpeg',
+                        height: 400,
+                        fit: BoxFit.contain,
+                      ),
+                      const SizedBox(height: 32),
+
+                      const SizedBox(height: 16),
+                    ],
                   ),
                 ),
                 const Spacer(flex: 3),
@@ -169,32 +142,29 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 SizedBox(
                   height: 280,
                   child: Stack(
-                    children: List.generate(pawCount, (index) {
-                      return AnimatedBuilder(
-                        animation: _controller,
-                        builder: (context, child) {
-                          return Opacity(
-                            opacity: _pawOpacities[index].value,
-                            child: SlideTransition(
-                              position: _pawOffsets[index],
-                              child: Transform.rotate(
-                                angle: index.isEven ? 0.25 : -0.25,
-                                child: Transform.scale(
-                                  scale: _pawScales[index].value,
-                                  child: const Icon(
-                                    Icons.pets,
-                                    size: 48,
-                                    color: Color(0xFFFFA500),
-                                  ),
-                                ),
-                              ),
+                children: List.generate(pawCount, (index) {
+                  return AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      return Opacity(
+                        opacity: _pawOpacities[index].value,
+                        child: SlideTransition(
+                          position: _pawOffsets[index],
+                          child: Transform.rotate(
+                            angle: index.isEven ? 0.25 : -0.25,
+                            child: const Icon(
+                              Icons.pets,
+                              size: 48,
+                              color: Color(0xFFFFA500),
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       );
-                    }),
-                  ),
-                ),
+                    },
+                  );
+                }),
+              ),
+            ),
                 const SizedBox(height: 20),
               ],
             ),
