@@ -22,7 +22,7 @@ class PetCard extends StatelessWidget {
             BoxShadow(
               color: Colors.grey[200]!,
               blurRadius: 4,
-              offset: const Offset(0, 2),
+              offset: const Offset(0,2),
             ),
           ],
         ),
