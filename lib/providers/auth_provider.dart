@@ -63,6 +63,21 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<bool> register(String email, String password, UserRole role) async {
+    return registerWithPetInfo(
+      email: email,
+      password: password,
+      userRole: role,
+    );
+  }
+
+  Future<bool> registerWithPetInfo({
+    required String email,
+    required String password,
+    required UserRole userRole,
+    String? name,
+    String? petName,
+    String? petType,
+  }) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -72,17 +87,35 @@ class AuthProvider with ChangeNotifier {
       _user = credential?.user;
       
       if (_user != null) {
-        // Store user role in Firestore
+        final userData = {
+          'email': email,
+          'role': userRole == UserRole.veterinarian ? 'veterinarian' : 'petOwner',
+          'createdAt': FieldValue.serverTimestamp(),
+        };
+
+        if (name != null) {
+          userData['name'] = name;
+        }
+
+        // Create user document
         await FirebaseFirestore.instance
             .collection('users')
             .doc(_user!.uid)
-            .set({
-          'email': email,
-          'role': role == UserRole.veterinarian ? 'veterinarian' : 'petOwner',
-          'createdAt': FieldValue.serverTimestamp(),
-        });
+            .set(userData);
+
+        // If pet owner, create pet document
+        if (userRole == UserRole.petOwner && petName != null && petType != null) {
+          await FirebaseFirestore.instance
+              .collection('pets')
+              .add({
+                'ownerId': _user!.uid,
+                'name': petName,
+                'type': petType,
+                'createdAt': FieldValue.serverTimestamp(),
+              });
+        }
         
-        _userRole = role;
+        _userRole = userRole;
       }
       
       _isLoading = false;

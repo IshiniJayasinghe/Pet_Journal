@@ -32,10 +32,13 @@ class _OwnerRegisterScreenState extends State<OwnerRegisterScreen> {
   Future<void> _register() async {
     if (_formKey.currentState!.validate()) {
       try {
-        final success = await context.read<app_auth.AuthProvider>().register(
-          _emailController.text.trim(),
-          _passwordController.text.trim(),
-          app_auth.UserRole.petOwner,
+        final success = await context.read<app_auth.AuthProvider>().registerWithPetInfo(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+          name: _nameController.text.trim(),
+          userRole: app_auth.UserRole.petOwner,
+          petName: _petNameController.text.trim(),
+          petType: _petTypeController.text.trim(),
         );
 
         if (!mounted) return;
@@ -51,12 +54,13 @@ class _OwnerRegisterScreenState extends State<OwnerRegisterScreen> {
             ),
           );
         }
-        if (!mounted) return;
-        Navigator.pop(context);
       } catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: const Color(0xFF2B2B2B),
+          ),
         );
       }
     }
@@ -121,6 +125,10 @@ class _OwnerRegisterScreenState extends State<OwnerRegisterScreen> {
                       labelText: 'Full Name',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color: Color(0xFFFFA500)),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20,
